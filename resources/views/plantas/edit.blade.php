@@ -20,7 +20,7 @@
             </div>
             <div>
                 <button type="submit" class="btn btn-success">Atualizar</button>
-                <a href="{{ route('us_index') }}" class="btn btn-primary">Voltar</a>
+                <a href="{{ route('pl_index') }}" class="btn btn-primary">Voltar</a>
             </div>
         </form>
     </div>

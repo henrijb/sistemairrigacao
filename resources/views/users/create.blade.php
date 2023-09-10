@@ -21,7 +21,10 @@
                 <label for="password">Senha:</label>
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
-            <button type="submit" class="btn btn-success">Salvar</button>
+            <div>
+                <button type="submit" class="btn btn-success">Salvar</button>
+                <a href="{{ route('us_index') }}" class="btn btn-primary">Voltar</a>
+            </div>
         </form>
     </div>
 @endsection

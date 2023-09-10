@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -54,10 +55,10 @@ class UserController extends Controller
          $validatedData = $request->validate([
              'name' => 'required|string|max:255',
              'email' => 'required|email|unique:users,email,'.$id,
-             'password' => 'required|string|min:6',
+             'password' => 'string|min:6',
          ]);
- 
-         $user = User::findOrFail($id);
+
+         $user = User::findOrFail($id);        
          $user->update($validatedData);
  
          return redirect('/users')->with('success', 'Usuário atualizado com sucesso.');

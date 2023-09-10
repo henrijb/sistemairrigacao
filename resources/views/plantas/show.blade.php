@@ -19,6 +19,6 @@
                 </tr>
             </tbody>
         </table>
-        <a href="{{ route('us_index') }}" class="btn btn-primary">Voltar</a>
+        <a href="{{ route('pl_index') }}" class="btn btn-primary">Voltar</a>
     </div>
 @endsection

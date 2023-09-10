@@ -15,11 +15,13 @@ use Illuminate\Support\Facades\Route;
 
 /**
  * Home Routes
-*/
+ */
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])
     ->name('home.index');
 
-/** outras  rotas */
+/** 
+ * Rota Usuarios 
+ */
 Route::prefix('/users')->group(function() {
     
     Route::get('/', [\App\Http\Controllers\UserController::class, 'index'])
@@ -39,9 +41,33 @@ Route::prefix('/users')->group(function() {
         
     Route::put('/{user}/update', [\App\Http\Controllers\UserController::class, 'update']);
 
-
     Route::delete('/{users}/delete', [\App\Http\Controllers\UserController::class, 'destroy'])
         ->name('us_delete');
+});
+
+
+/** Rota Plantas */
+Route::prefix('/plantas')->group(function() {
+    
+    Route::get('/', [\App\Http\Controllers\PlantaController::class, 'index'])
+        ->name('pl_index');
+
+    Route::get('/create', [\App\Http\Controllers\PlantaController::class, 'create'])
+        ->name('pl_create');
+
+    Route::post('/create', [\App\Http\Controllers\PlantaController::class, 'store'])
+        ->name('pl_store');
+
+    Route::get('/{user}/show', [\App\Http\Controllers\PlantaController::class, 'show'])
+        ->name('pl_show');
+
+    Route::get('/{user}/edit', [\App\Http\Controllers\PlantaController::class, 'edit'])
+        ->name('pl_edit');
+        
+    Route::put('/{user}/update', [\App\Http\Controllers\PlantaController::class, 'update']);
+
+    Route::delete('/{users}/delete', [\App\Http\Controllers\PlantaController::class, 'destroy'])
+        ->name('pl_delete');
 });
 
 

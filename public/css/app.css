@@ -75,6 +75,9 @@ footer {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    max-height: 77px !important;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .btn:hover {
@@ -87,5 +90,5 @@ footer {
 }
 
 .btn-primary {
-    margin-top: 20px;
+    /*margin-top: 20px;*/
 }
