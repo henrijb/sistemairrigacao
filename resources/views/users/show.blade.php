@@ -19,6 +19,6 @@
                 </tr>
             </tbody>
         </table>
-        <a href="{{ url('/users') }}" class="btn btn-primary">Voltar</a>
+        <a href="{{ url('/app/users') }}" class="btn btn-primary">Voltar</a>
     </div>
 @endsection

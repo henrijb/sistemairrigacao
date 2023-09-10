@@ -1,0 +1,91 @@
+/* Defina um estilo de fundo global */
+body {
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilo do cabeçalho e da barra de navegação */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center; /* Alinhe verticalmente a imagem e o título */
+}
+
+.navbar-brand img {
+    max-width: 50px; /* Defina a largura máxima da imagem do logotipo */
+    margin-right: 5px; /* Espaço entre a imagem e o menu */
+}
+
+.navbar-menu {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.navbar-menu li {
+    margin-right: 20px;
+}
+
+.navbar-menu a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.navbar-menu a:hover {
+    color: #ff9900;
+}
+
+/* Estilo do conteúdo principal */
+main {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo do rodapé */
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #333;
+    color: #fff;
+}
+
+/* Estilo de botões (opcional) */
+.btn {
+    padding: 10px 20px;
+    background-color: #ff9900;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #ff6600;
+}
+
+.table {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.btn-primary {
+    margin-top: 20px;
+}

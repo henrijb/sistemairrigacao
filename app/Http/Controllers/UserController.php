@@ -10,13 +10,13 @@ class UserController extends Controller
      public function index()
      {
          $users = User::all();
-         return view('site.users.index', ['users' => $users]);
+         return view('users.index', ['users' => $users]);
      }
  
      // Formulário de criação de usuário
      public function create()
      {
-         return view('site.users.create');
+         return view('users.create');
      }
  
      // Armazenar um novo usuário
@@ -38,14 +38,14 @@ class UserController extends Controller
      public function show($id)
      {
          $user = User::findOrFail($id);
-         return view('site.users.show', ['user' => $user]);
+         return view('users.show', ['user' => $user]);
      }
  
      // Formulário de edição de usuário
      public function edit($id)
      {
          $user = User::findOrFail($id);
-         return view('site.users.edit', ['user' => $user]);
+         return view('users.edit', ['user' => $user]);
      }
  
      // Atualizar um usuário
@@ -53,7 +53,6 @@ class UserController extends Controller
      {
          $validatedData = $request->validate([
              'name' => 'required|string|max:255',
-             'login' => 'required|string|max:255',
              'email' => 'required|email|unique:users,email,'.$id,
              'password' => 'required|string|min:6',
          ]);
