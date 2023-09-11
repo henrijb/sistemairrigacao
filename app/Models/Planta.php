@@ -43,5 +43,7 @@ class Planta extends Model
      * @var array<string, string>
      */
     protected $casts = [
+        'data_plantacao'  => 'datetime',
+        'ultima_rega' => 'datetime',
     ];
 }

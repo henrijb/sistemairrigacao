@@ -18,8 +18,16 @@
                 @foreach ($plantas as $planta)
                 <tr>
                     <td>{{ $planta->id }}</td>
-                    <td>{{ $planta->name }}</td>
-                    <td>{{ $planta->email }}</td>
+                    <td>{{ $planta->nome }}</td>
+                    <td>{{ $planta->data_plantacao->format('d/m/Y') }}</td>
+                    <td>{{ $planta->ultima_rega->format('d/m/Y H:i') }}</td>
+
+                    @if($planta->status == 'A')         
+                        <td>Ativo</td>         
+                    @else
+                        <td>Desativado</td>        
+                    @endif
+
                     <td>
                         <a href="{{ url('/plantas/' . $planta->id . '/show/') }}" class="btn btn-info">Ver</a>
                         <a href="{{ url('/plantas/' . $planta->id . '/edit/') }}" class="btn btn-warning">Editar</a>

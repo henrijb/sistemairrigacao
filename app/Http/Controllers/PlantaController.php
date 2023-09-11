@@ -27,12 +27,12 @@ class PlantaController extends Controller
              'nome' => 'required|string|max:255',
              'data_plantacao' => 'required|date_format:d/m/Y',
              'hora_rega' => 'required|string|max:255',
-             'ultima_rega' => 'required|date_format:d/m/Y',
+             'ultima_rega' => 'required|date_format:d/m/Y H:i',
              'status' => 'required|string|min:1|max:1',
              'porta_arduino' => 'required|string|min:1|max:2',
              'id_arduino' => 'required|string|min:1',
          ]);
- 
+
          $planta = Planta::create($validatedData);
  
          return redirect('/plantas')->with('success', 'Planta cadastrada com sucesso.');
