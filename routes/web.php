@@ -71,6 +71,30 @@ Route::prefix('/plantas')->group(function() {
 });
 
 
+/** Rota Controladora */
+Route::prefix('/controladoras')->group(function() {
+    
+    Route::get('/', [\App\Http\Controllers\ControladoraController::class, 'index'])
+        ->name('ct_index');
+
+    Route::get('/create', [\App\Http\Controllers\ControladoraController::class, 'create'])
+        ->name('ct_create');
+
+    Route::post('/create', [\App\Http\Controllers\ControladoraController::class, 'store'])
+        ->name('ct_store');
+
+    Route::get('/{user}/show', [\App\Http\Controllers\ControladoraController::class, 'show'])
+        ->name('ct_show');
+
+    Route::get('/{user}/edit', [\App\Http\Controllers\ControladoraController::class, 'edit'])
+        ->name('ct_edit');
+        
+    Route::put('/{user}/update', [\App\Http\Controllers\ControladoraController::class, 'update']);
+
+    Route::delete('/{users}/delete', [\App\Http\Controllers\ControladoraController::class, 'destroy'])
+        ->name('ct_delete');
+});
+
 /*
 /**
      * Home Routes
