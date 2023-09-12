@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ControladoraPortas;
 
 class Controladora extends Model
 {
     use HasFactory;
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -18,23 +19,12 @@ class Controladora extends Model
         'nome',
         'status',
         'numero_portas',
+        'ip'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        //'id_controladora',
-    ];
+    public function portas()
+    {
+        return $this->hasMany(ControladoraPortas::class, 'controladora_id', 'id');
+    }
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'numero_portas'  => 'integer',
-    ];
 }

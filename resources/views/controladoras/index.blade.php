@@ -11,6 +11,7 @@
                     <th>Nome</th>
                     <th>Número de Portas</th>
                     <th>Status</th>
+                    <th>IP<th>
                 </tr>
             </thead>
             <tbody>
@@ -19,11 +20,12 @@
                     <td>{{ $controladora->id }}</td>
                     <td>{{ $controladora->nome }}</td>
                     <td>{{ $controladora->numero_portas }}</td>
+                    <td>{{ $controladora->ip }}</td>
 
-                    @if($controladora->status == 'A')         
-                        <td>Ativo</td>         
+                    @if($controladora->status == 'A')
+                        <td>Ativo</td>
                     @else
-                        <td>Desativado</td>        
+                        <td>Desativado</td>
                     @endif
 
                     <td>

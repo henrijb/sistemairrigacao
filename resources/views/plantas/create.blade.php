@@ -42,11 +42,18 @@
             <div><hr></div>
             <div class="form-group">
                 <label for="id_arduino">Arduino ID :</label>
-                <input type="text" class="form-control" id="id_arduino" name="id_arduino" required>
+                <select class="form-control" name="id_arduino" id="id_arduino" required>
+                    <option>Selecione</option>
+                    @foreach ($controladoras as $controladora)
+                        <option value="{{ $controladora->id }}">{{ $controladora->nome }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="form-group">
                 <label for="porta_arduino">Arduino Porta:</label>
-                <input type="text" class="form-control" id="porta_arduino" name="porta_arduino" required>
+                <select class="form-control" name="porta_arduino" id="porta_arduino" required>
+                    <option>Selecione</option>
+                </select>
             </div>
             <div>
                 <button type="submit" class="btn btn-success">Salvar</button>
@@ -54,4 +61,31 @@
             </div>
         </form>
     </div>
+    <script>
+        $(document).ready(function () {
+            $('#id_arduino').change(function() {
+                $.ajax({
+                    url: '/controladoras/get_portas/' + $('#id_arduino').val(),
+                    type: 'GET',
+                    success: function (data) {
+                        // Limpe as opções existentes
+                        $('#porta_arduino').empty();
+
+                        var parsedData = JSON.parse(data);
+
+                        $.each(parsedData, function (index, obj) {
+                            $('#porta_arduino').append($('<option>', {
+                                value: obj.id,
+                                text: obj.nome
+                            }));
+                        });
+                    },
+                    error: function (error) {
+                        console.log('Ocorreu um erro: ' + error);
+                    }
+                });
+            })
+    });
+    </script>
 @endsection
+

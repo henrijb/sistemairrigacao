@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Planta;
+use App\Models\Controladora;
 
 class PlantaController extends Controller
 {
@@ -13,13 +14,15 @@ class PlantaController extends Controller
          $plantas = Planta::all();
          return view('plantas.index', ['plantas' => $plantas]);
      }
- 
+
      // Formulário de criação de planta
      public function create()
      {
-         return view('plantas.create');
+        // Verificar se existe a necessidade de busca por status, aí tem que mudar a consulta
+        $controladoras = Controladora::all();
+        return view('plantas.create', ['controladoras' => $controladoras]);
      }
- 
+
      // Armazenar uma nova planta
      public function store(Request $request)
      {
@@ -34,24 +37,24 @@ class PlantaController extends Controller
          ]);
 
          $planta = Planta::create($validatedData);
- 
+
          return redirect('/plantas')->with('success', 'Planta cadastrada com sucesso.');
      }
- 
+
      // Exibir um usuário específico
      public function show($id)
      {
          $planta = Planta::findOrFail($id);
          return view('plantas.show', ['planta' => $planta]);
      }
- 
+
      // Formulário de edição de usuário
      public function edit($id)
      {
          $planta = Planta::findOrFail($id);
          return view('plantas.edit', ['planta' => $planta]);
      }
- 
+
      // Atualizar um usuário
      public function update(Request $request, $id)
      {
@@ -65,8 +68,8 @@ class PlantaController extends Controller
             'porta_arduino' => 'required|string|min:1|max:2',
             'id_arduino' => 'required|string|min:1',
          ]);
- 
-         
+
+
 
          //$validatedData['data_plantacao'] = \Carbon\Carbon::createFromFormat('d/m/Y', $validatedData['data_plantacao']);
          //$validatedData['ultima_rega'] = \Carbon\Carbon::createFromFormat('d/m/Y', $validatedData['ultima_rega']);
@@ -77,16 +80,16 @@ class PlantaController extends Controller
 
          $planta = Planta::findOrFail($id);
          $planta->update($validatedData);
- 
+
          return redirect('/plantas')->with('success', 'Planta atualizada com sucesso.');
      }
- 
+
      // Excluir um usuário
      public function destroy($id)
      {
          $planta = Planta::findOrFail($id);
          $planta->delete();
- 
+
          return redirect('/plantas')->with('success', 'Planta excluída com sucesso.');
      }
 }

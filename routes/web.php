@@ -19,11 +19,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])
     ->name('home.index');
 
-/** 
- * Rota Usuarios 
+/**
+ * Rota Usuarios
  */
 Route::prefix('/users')->group(function() {
-    
+
     Route::get('/', [\App\Http\Controllers\UserController::class, 'index'])
         ->name('us_index');
 
@@ -38,7 +38,7 @@ Route::prefix('/users')->group(function() {
 
     Route::get('/{user}/edit', [\App\Http\Controllers\UserController::class, 'edit'])
         ->name('us_edit');
-        
+
     Route::put('/{user}/update', [\App\Http\Controllers\UserController::class, 'update']);
 
     Route::delete('/{users}/delete', [\App\Http\Controllers\UserController::class, 'destroy'])
@@ -48,7 +48,7 @@ Route::prefix('/users')->group(function() {
 
 /** Rota Plantas */
 Route::prefix('/plantas')->group(function() {
-    
+
     Route::get('/', [\App\Http\Controllers\PlantaController::class, 'index'])
         ->name('pl_index');
 
@@ -63,7 +63,7 @@ Route::prefix('/plantas')->group(function() {
 
     Route::get('/{user}/edit', [\App\Http\Controllers\PlantaController::class, 'edit'])
         ->name('pl_edit');
-        
+
     Route::put('/{user}/update', [\App\Http\Controllers\PlantaController::class, 'update']);
 
     Route::delete('/{users}/delete', [\App\Http\Controllers\PlantaController::class, 'destroy'])
@@ -73,7 +73,7 @@ Route::prefix('/plantas')->group(function() {
 
 /** Rota Controladora */
 Route::prefix('/controladoras')->group(function() {
-    
+
     Route::get('/', [\App\Http\Controllers\ControladoraController::class, 'index'])
         ->name('ct_index');
 
@@ -88,7 +88,9 @@ Route::prefix('/controladoras')->group(function() {
 
     Route::get('/{user}/edit', [\App\Http\Controllers\ControladoraController::class, 'edit'])
         ->name('ct_edit');
-        
+
+    Route::get('/get_portas/{controladora}', [\App\Http\Controllers\ControladoraController::class, 'getPortas']);
+
     Route::put('/{user}/update', [\App\Http\Controllers\ControladoraController::class, 'update']);
 
     Route::delete('/{users}/delete', [\App\Http\Controllers\ControladoraController::class, 'destroy'])
@@ -134,7 +136,7 @@ Route::prefix('/controladoras')->group(function() {
             Route::patch('/{user}/update', 'UsersController@update')->name('users.update');
             Route::delete('/{user}/delete', 'UsersController@destroy')->name('users.destroy');
         });
-        
+
     });
 
 */

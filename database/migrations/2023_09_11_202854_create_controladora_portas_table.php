@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateControladorasTable extends Migration
+class CreateControladoraPortasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateControladorasTable extends Migration
      */
     public function up()
     {
-        Schema::create('controladoras', function (Blueprint $table) {
+        Schema::create('controladora_portas', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('controladora_id')->unsigned();
             $table->string('nome');
             $table->string('status');
-            $table->integer('numero_portas');
-            $table->string('ip');
             $table->timestamps();
+
+            $table->foreign('controladora_id')->references('id')->on('controladoras');
         });
     }
 
@@ -30,6 +31,6 @@ class CreateControladorasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('controladoras');
+        Schema::dropIfExists('controladora_portas');
     }
 }

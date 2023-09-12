@@ -31,6 +31,10 @@
                 <label for="numero_portas">Arduino Porta:</label>
                 <input type="text" class="form-control" id="numero_portas" name="numero_portas" required>
             </div>
+            <div class="form-group">
+                <label for="ip">IP:</label>
+                <input type="text" class="form-control" id="ip" name="ip" required>
+            </div>
             <div>
                 <button type="submit" class="btn btn-success">Salvar</button>
                 <a href="{{ route('pl_index') }}" class="btn btn-primary">Voltar</a>
