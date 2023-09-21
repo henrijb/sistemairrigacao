@@ -18,7 +18,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="numero_portas">Arduino Porta:</label>
+                <label for="numero_portas">Quantidade de Portas:</label>
                 <input type="text" class="form-control" id="numero_portas" name="numero_portas" value="{{ $controladora->numero_portas }}"  required>
             </div>
             <div>

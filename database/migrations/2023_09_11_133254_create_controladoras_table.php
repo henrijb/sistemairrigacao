@@ -20,6 +20,7 @@ class CreateControladorasTable extends Migration
             $table->integer('numero_portas');
             $table->string('ip');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

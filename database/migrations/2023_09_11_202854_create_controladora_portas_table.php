@@ -19,6 +19,7 @@ class CreateControladoraPortasTable extends Migration
             $table->string('nome');
             $table->string('status');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('controladora_id')->references('id')->on('controladoras');
         });

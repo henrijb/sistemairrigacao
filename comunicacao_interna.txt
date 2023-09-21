@@ -1,0 +1,84 @@
+client.println("HTTP/1.1 200 OK");
+client.println("Content-Type: application/json");
+
+----------------------------------------------------------------------------------------------------------
+if (request.indexOf("/pin_status") != -1) {
+      // Lógica para verificar o status do pino aqui
+    } else if (request.indexOf("POST /pin_control") != -1) {
+      // Trate a solicitação POST aqui
+      client.println("HTTP/1.1 200 OK");
+      client.println("Content-Type: text/plain");
+      client.println("Connection: close");
+      client.println();
+      client.println("POST recebido com sucesso");
+
+      // Imprima os dados recebidos no console (Serial)
+      Serial.println("Dados POST recebidos:");
+      Serial.println(request);
+
+      // Agora você pode analisar o corpo da solicitação para obter os dados enviados
+      // Por exemplo, se os dados estiverem no formato "pin=7&state=1", você pode usar a função strtok() para dividir os dados.
+      // Certifique-se de adicionar o código de tratamento apropriado aqui.
+
+      client.println();
+
+https://www.arduinoecia.com.br/arduino-motor-shield-l293d/https://www.arduinoecia.com.br/arduino-motor-shield-l293d/https://www.arduinoecia.com.br/arduino-motor-shield-l293d/
+
+
+
+
+
+
+#include <AFMotor.h>
+
+AF_DCMotor motor(4);
+
+void setup()
+{
+	//Set initial speed of the motor & stop
+	motor.setSpeed(200);
+	motor.run(RELEASE);
+}
+
+void loop()
+{
+	uint8_t i;
+
+	// Turn on motor
+	motor.run(FORWARD);
+
+	// Accelerate from zero to maximum speed
+	for (i=0; i<255; i++)
+	{
+		motor.setSpeed(i);
+		delay(10);
+	}
+
+	// Decelerate from maximum speed to zero
+	for (i=255; i!=0; i--)
+	{
+		motor.setSpeed(i);
+		delay(10);
+	}
+
+	// Now change motor direction
+	motor.run(BACKWARD);
+
+	// Accelerate from zero to maximum speed
+	for (i=0; i<255; i++)
+	{
+		motor.setSpeed(i);
+		delay(10);
+	}
+
+	// Decelerate from maximum speed to zero
+	for (i=255; i!=0; i--)
+	{
+		motor.setSpeed(i);
+		delay(10);
+	}
+
+	// Now turn off motor
+	motor.run(RELEASE);
+	delay(1000);
+}

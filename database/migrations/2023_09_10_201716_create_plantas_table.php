@@ -16,9 +16,9 @@ class CreatePlantasTable extends Migration
         Schema::create('plantas', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
-            $table->string('hora_rega');
-            $table->dateTime('ultima_rega');
-            $table->dateTime('data_plantacao');
+            $table->time('hora_rega');
+            $table->dateTime('ultima_rega')->nullable();
+            $table->date('data_plantacao');
             $table->string('status');
             $table->integer('porta_arduino');
             $table->integer('id_arduino');

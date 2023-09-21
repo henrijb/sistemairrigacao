@@ -18,6 +18,7 @@ class CreatePlantasControladoraPortasTable extends Migration
             $table->bigInteger('planta_id')->unsigned();
             $table->bigInteger('controladora_porta_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('planta_id')->references('id')->on('plantas');
             $table->foreign('controladora_porta_id')->references('id')->on('controladora_portas');
