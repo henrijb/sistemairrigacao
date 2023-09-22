@@ -25,5 +25,31 @@
     </footer>
 
     <!-- javaScript aqui -->
+    <script>
+        $(document).ready(function () {
+            $('#id_arduino').change(function() {
+                $.ajax({
+                    url: '/controladoras/get_portas/' + $('#id_arduino').val(),
+                    type: 'GET',
+                    success: function (data) {
+                        // Limpe as opções existentes
+                        $('#porta_arduino').empty();
+
+                        var parsedData = JSON.parse(data);
+
+                        $.each(parsedData, function (index, obj) {
+                            $('#porta_arduino').append($('<option>', {
+                                value: obj.id,
+                                text: obj.nome
+                            }));
+                        });
+                    },
+                    error: function (error) {
+                        console.log('Ocorreu um erro: ' + error);
+                    }
+                });
+            })
+        });
+    </script>
 </body>
 </html>

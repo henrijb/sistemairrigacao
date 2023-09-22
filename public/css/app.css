@@ -96,3 +96,7 @@ footer {
 .btn-primary {
     /*margin-top: 20px;*/
 }
+
+.toolbar {
+    margin-top: -25px;
+}

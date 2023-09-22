@@ -23,15 +23,15 @@
                 </tr>
                 <tr>
                     <th>Hora da última rega:</th>
-                    <td>{{ $planta->ultima_rega->format('d/m/Y H:i') }}</td>
+                    <td>{{ isset($planta->ultima_rega) ? $planta->ultima_rega->format('d/m/Y H:i') : '' }}</td>
                 </tr>
                 <tr>
                     <th>Status:</th>
 
-                     @if($planta->status == 'A')         
-                        <td>Ativo</td>         
+                     @if($planta->status == 'A')
+                        <td>Ativo</td>
                      @else
-                        <td>Desativado</td>        
+                        <td>Desativado</td>
                      @endif
                 </tr>
                 <tr>

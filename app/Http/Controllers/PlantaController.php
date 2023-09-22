@@ -28,9 +28,9 @@ class PlantaController extends Controller
      {
          $validatedData = $request->validate([
              'nome' => 'required|string|max:255',
-             'data_plantacao' => 'required|date_format:d/m/Y',
+             'data_plantacao' => 'required|date_format:Y-m-d',
              'hora_rega' => 'required|string|max:255',
-             'ultima_rega' => 'date_format:d/m/Y H:i',
+             'ultima_rega' => 'nullable|date_format:d/m/Y H:i',
              'status' => 'required|string|min:1|max:1',
              'porta_arduino' => 'required|string|min:1|max:2',
              'id_arduino' => 'required|string|min:1',
@@ -52,7 +52,8 @@ class PlantaController extends Controller
      public function edit($id)
      {
          $planta = Planta::findOrFail($id);
-         return view('plantas.edit', ['planta' => $planta]);
+         $controladoras = Controladora::all();
+         return view('plantas.edit', ['planta' => $planta, 'controladoras' => $controladoras]);
      }
 
      // Atualizar um usuário
@@ -61,9 +62,9 @@ class PlantaController extends Controller
 
          $validatedData = $request->validate([
             'nome' => 'required|string|max:255',
-            'data_plantacao' => 'required|date_format:d/m/Y',
+            'data_plantacao' => 'required|date_format:Y-m-d',
             'hora_rega' => 'required|string|max:255',
-            'ultima_rega' => 'required|date_format:d/m/Y',
+            'ultima_rega' => 'nullable|date_format:d/m/Y H:i',
             'status' => 'required|string|min:1|max:1',
             'porta_arduino' => 'required|string|min:1|max:2',
             'id_arduino' => 'required|string|min:1',
@@ -74,8 +75,8 @@ class PlantaController extends Controller
          //$validatedData['data_plantacao'] = \Carbon\Carbon::createFromFormat('d/m/Y', $validatedData['data_plantacao']);
          //$validatedData['ultima_rega'] = \Carbon\Carbon::createFromFormat('d/m/Y', $validatedData['ultima_rega']);
 
-         $validatedData['data_plantacao'] = $validatedData['data_plantacao']->format('Y-m-d H:i:s');
-         $validatedData['ultima_rega'] =  $validatedData['ultima_rega']->format('Y-m-d H:i:s');
+//         $validatedData['data_plantacao'] = $validatedData['data_plantacao']->format('Y-m-d H:i:s');
+//         $validatedData['ultima_rega'] =  $validatedData['ultima_rega']->format('Y-m-d H:i:s');
 
 
          $planta = Planta::findOrFail($id);
