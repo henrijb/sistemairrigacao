@@ -29,8 +29,7 @@ class PlantaController extends Controller
          $validatedData = $request->validate([
              'nome' => 'required|string|max:255',
              'data_plantacao' => 'required|date_format:Y-m-d',
-             'hora_rega' => 'required|string|max:255',
-             'ultima_rega' => 'nullable|date_format:d/m/Y H:i',
+             'percentual_umidade' => 'required|max:2',
              'status' => 'required|string|min:1|max:1',
              'porta_arduino' => 'required|string|min:1|max:2',
              'id_arduino' => 'required|string|min:1',
@@ -63,8 +62,7 @@ class PlantaController extends Controller
          $validatedData = $request->validate([
             'nome' => 'required|string|max:255',
             'data_plantacao' => 'required|date_format:Y-m-d',
-            'hora_rega' => 'required|string|max:255',
-            'ultima_rega' => 'nullable|date_format:d/m/Y H:i',
+            'percentual_umidade' => 'required|max:2',
             'status' => 'required|string|min:1|max:1',
             'porta_arduino' => 'required|string|min:1|max:2',
             'id_arduino' => 'required|string|min:1',

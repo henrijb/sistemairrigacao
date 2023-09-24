@@ -4,8 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -21,7 +19,7 @@ class Planta extends Model
     protected $fillable = [
         'nome',
         'data_plantacao',
-        'hora_rega',
+        'percentual_umidade',
         'ultima_rega',
         'status',
         'porta_arduino',

@@ -9,7 +9,11 @@
 </div>
 <div class="form-group">
     <label for="hora_rega">Hora das Regas:</label>
-    <input type="time" class="form-control" id="hora_rega" name="hora_rega" value="{{ old('hora_rega', $planta->hora_rega) }}" required>
+    <span>{{ isset($planta->ultima_rega) ? $planta->ultima_rega->format('d/m/Y H:i') : '' }}</span>
+</div>
+<div class="form-group">
+    <label for="hora_rega">Percentual mínimo de umidade do solo:</label>
+    <input type="number" class="form-control" id="percentual_umidade" name="percentual_umidade" value="{{ old('percentual_umidade', $planta->percentual_umidade) }}" required>
 </div>
 <div class="form-group">
     <label for="ultima_rega">Hora da última rega:</label>

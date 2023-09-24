@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Controladora;
 use App\Models\Planta;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -10,6 +11,8 @@ use Psy\Readline\Hoa\Console;
 
 class MonitoramentoCommand extends Command
 {
+    const STATUS_ATIVO  = 'A';
+    const STATUS_INATIVO = 'B';
     /**
      * The name and signature of the console command.
      *
@@ -41,30 +44,35 @@ class MonitoramentoCommand extends Command
      */
     public function handle()
     {
-
-        $plantas = Planta::all();
+        $plantas = Planta::all()
+            ->where('status', self::STATUS_ATIVO);
 
         foreach ($plantas as $planta) {
-            // colocar aqui o Http:post(env('URL_ARDUINO') . '/umidade', [])
-
-            // Simulação do retorno do banco e do arduino
             $this->alert($planta->nome);
-            $umidadeMinima = $this->ask('Qual é a umidade mínima');
-            //$umidadeMaxima = $this->ask('Qual é a umidade máxima');
 
-            $umidadeSolo = rand(1, 100); // Simulando a umidade da planta no momento
+            $controladora = Controladora::where('id', $planta->id_arduino)->first();
 
-            $porta = $planta->porta_arduino;
-            $this->info('Escutando a porta ' . $porta . ' do arduino');
-            $this->info('');
-            $this->comment('Umidade atual do solo da planta: ' . $umidadeSolo);
-            $this->info('');
+            $this->info('Realizando a consulta na controladora');
 
-            while ($umidadeSolo <= $umidadeMinima) {
+            $percentualUmidade = $this->monitorarUmidade($planta, $controladora);
+
+            if ($percentualUmidade === false) {
+                $this->alert('Não foi possivel realizar a rega na planta ' . $planta->nome);
+                continue;
+            }
+
+            $this->comment('Identificando a umidade do solo...');
+            $this->info('Umidade atual do solo: ' . $percentualUmidade);
+
+            while ($percentualUmidade <= $planta->percentual_umidade) {
                 $this->info('Realizando a rega...');
-                $umidadeSolo += 2; // Simulando a umidade do solo com a rega
-                $this->info('Umidade atual do solo: ' . $umidadeSolo);
+
+                $this->regar($controladora, true);
                 sleep(2);
+                $this->regar($controladora, false);
+                sleep(8);
+                $percentualUmidade = $this->monitorarUmidade($planta, $controladora);
+                $this->info('Umidade atual do solo: ' . $percentualUmidade);
             }
 
             $this->info('');
@@ -76,8 +84,35 @@ class MonitoramentoCommand extends Command
             if ($planta->update(['ultima_rega' => $dataDaRega])) {
                 $this->info('Dados atualizados com sucesso!');
             }
-
-            // Final da simulação
         }
+    }
+
+    private function monitorarUmidade(Planta $planta, Controladora $controladora)
+    {
+        $response = Http::post($controladora->ip . '/umidade', [
+            'porta' => $planta->porta_arduino
+        ]);
+
+        if ($response->successful()) {
+            $data = json_decode($response->body(), true);
+            return $data['umidade'];
+        };
+
+        return false;
+    }
+
+    private function regar(Controladora $controladora, $shutdown = false)
+    {
+        $response = Http::post($controladora->ip . '/rele', [
+            'power' => $shutdown,
+            'porta' => 25 // @todo criar coluna no banco para cadastrar a porta do relé
+        ]);
+
+        if ($response->successful()) {
+            $data = json_decode($response->body(), true);
+            return $data['rele_status'];
+        }
+
+        return false;
     }
 }

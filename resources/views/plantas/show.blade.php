@@ -18,8 +18,8 @@
                     <td>{{ $planta->data_plantacao->format('d/m/Y') }}</td>
                 </tr>
                 <tr>
-                    <th>Hora das Regas:</th>
-                    <td>{{ $planta->hora_rega }}</td>
+                    <th>Percentual mínimo de umidade do solo:</th>
+                    <td>{{ $planta->percentual_umidade }}%</td>
                 </tr>
                 <tr>
                     <th>Hora da última rega:</th>
