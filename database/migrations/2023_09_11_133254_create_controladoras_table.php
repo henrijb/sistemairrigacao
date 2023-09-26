@@ -17,7 +17,8 @@ class CreateControladorasTable extends Migration
             $table->id();
             $table->string('nome');
             $table->string('status');
-            $table->integer('numero_portas');
+            $table->integer('numero_portas_analogicas');
+            $table->integer('numero_portas_digitais');
             $table->string('ip');
             $table->timestamps();
             $table->softDeletes();

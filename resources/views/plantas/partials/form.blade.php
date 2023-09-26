@@ -38,11 +38,18 @@
     <div class="text-danger">{{ $errors->first('id_arduino') }}</div>
 </div>
 <div class="form-group">
-    <label for="porta_arduino">Arduino Porta:</label>
-    <select class="form-control" name="porta_arduino" id="porta_arduino" required>
+    <label for="porta_arduino_analogica">Arduino Porta Analógica:</label>
+    <select class="form-control" name="porta_arduino_analogica" id="porta_arduino_analogica" required>
         <option>Selecione</option>
     </select>
-    <div class="text-danger">{{ $errors->first('porta_arduino') }}</div>
+    <div class="text-danger">{{ $errors->first('porta_arduino_analogica') }}</div>
+</div>
+<div class="form-group">
+    <label for="porta_arduino_digital">Arduino Porta Digital:</label>
+    <select class="form-control" name="porta_arduino_digital" id="porta_arduino_digital" required>
+        <option>Selecione</option>
+    </select>
+    <div class="text-danger">{{ $errors->first('porta_arduino_digital') }}</div>
 </div>
 <div>
     <button type="submit" class="btn btn-success">Salvar</button>

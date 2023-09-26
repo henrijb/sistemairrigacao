@@ -36,11 +36,15 @@
                 </tr>
                 <tr>
                     <th>Arduino ID:</th>
-                    <td>{{ $planta->id_arduino }}</td>
+                    <td>{{ $planta->controladora->nome }}</td>
                 </tr>
                 <tr>
-                    <th>Arduino Porta:</th>
-                    <td>{{ $planta->porta_arduino }}</td>
+                    <th>Arduino Porta Analógica:</th>
+                    <td>{{ $planta->controladoraPorta->nome }}</td>
+                </tr>
+                <tr>
+                    <th>Arduino Porta Digital:</th>
+                    <td>{{ $planta->controladoraPorta->nome }}</td>
                 </tr>
             </tbody>
         </table>

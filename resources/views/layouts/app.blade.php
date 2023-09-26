@@ -16,6 +16,16 @@
 
     <main>
         <div class="container">
+            @if(isset ($errors) && count($errors) > 0)
+                <div class="alert alert-warning" role="alert">
+                    <ul class="list-unstyled mb-0">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             @yield('content')
         </div>
     </main>
@@ -33,15 +43,26 @@
                     type: 'GET',
                     success: function (data) {
                         // Limpe as opções existentes
-                        $('#porta_arduino').empty();
+                        $('#porta_arduino_analogica').empty();
+                        $('#porta_arduino_digital').empty();
 
                         var parsedData = JSON.parse(data);
 
                         $.each(parsedData, function (index, obj) {
-                            $('#porta_arduino').append($('<option>', {
-                                value: obj.id,
-                                text: obj.nome
-                            }));
+                            if(obj.tipo == 'A') {
+                                $('#porta_arduino_analogica').append($('<option>', {
+                                    value: obj.id,
+                                    text: obj.nome
+                                }));
+                            }
+
+                            if(obj.tipo == 'D') {
+                                $('#porta_arduino_digital').append($('<option>', {
+                                    value: obj.id,
+                                    text: obj.nome
+                                }));
+                            }
+
                         });
                     },
                     error: function (error) {

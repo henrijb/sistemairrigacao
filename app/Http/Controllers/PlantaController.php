@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Planta;
 use App\Models\Controladora;
+use App\Models\ControladoraPortas;
 
 class PlantaController extends Controller
 {
@@ -31,7 +32,8 @@ class PlantaController extends Controller
              'data_plantacao' => 'required|date_format:Y-m-d',
              'percentual_umidade' => 'required|max:2',
              'status' => 'required|string|min:1|max:1',
-             'porta_arduino' => 'required|string|min:1|max:2',
+             'porta_arduino_analogica' => 'required|string|min:1|max:2',
+             'porta_arduino_digital' => 'required|string|min:1|max:2',
              'id_arduino' => 'required|string|min:1',
          ]);
 
@@ -43,8 +45,11 @@ class PlantaController extends Controller
      // Exibir um usuário específico
      public function show($id)
      {
-         $planta = Planta::findOrFail($id);
-         return view('plantas.show', ['planta' => $planta]);
+        $planta = Planta::with('controladora')->findOrFail($id)::with('controladoraPorta')->findOrFail($id);
+
+
+
+        return view('plantas.show', ['planta' => $planta]);
      }
 
      // Formulário de edição de usuário
@@ -64,7 +69,8 @@ class PlantaController extends Controller
             'data_plantacao' => 'required|date_format:Y-m-d',
             'percentual_umidade' => 'required|max:2',
             'status' => 'required|string|min:1|max:1',
-            'porta_arduino' => 'required|string|min:1|max:2',
+            'porta_arduino_analogica' => 'required|string|min:1|max:2',
+            'porta_arduino_digital' => 'required|string|min:1|max:2',
             'id_arduino' => 'required|string|min:1',
          ]);
 
@@ -91,4 +97,6 @@ class PlantaController extends Controller
 
          return redirect('/plantas')->with('success', 'Planta excluída com sucesso.');
      }
+
+
 }

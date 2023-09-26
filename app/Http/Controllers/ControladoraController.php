@@ -27,17 +27,30 @@ class ControladoraController extends Controller
          $validatedData = $request->validate([
              'nome' => 'required|string|max:255',
              'status' => 'required|string|min:1|max:1',
-             'numero_portas' => 'required|string|min:1|max:2',
+             'numero_portas_analogicas' => 'required|string|min:1|max:2',
+             'numero_portas_digitais' => 'required|string|min:1|max:2',
              'ip' => 'required'
          ]);
 
          $controladora = Controladora::create($validatedData);
 
          if ($controladora) {
-            for($i = 0; $i < $controladora->numero_portas; $i++) {
+            for($i = 0; $i < $controladora->numero_portas_analogicas; $i++) {
                 $arr = [
                     'controladora_id' => $controladora->id,
                     'nome' => 'A' . $i,
+                    'tipo' => 'A',
+                    'status' => 0,
+                ];
+
+                ControladoraPortas::create($arr);
+            }
+
+            for($i = 0; $i < $controladora->numero_portas_digitais; $i++) {
+                $arr = [
+                    'controladora_id' => $controladora->id,
+                    'nome' => 'D' . $i,
+                    'tipo' => 'D',
                     'status' => 0,
                 ];
 
@@ -69,11 +82,47 @@ class ControladoraController extends Controller
          $validatedData = $request->validate([
             'nome' => 'required|string|max:255',
             'status' => 'required|string|min:1|max:1',
-            'numero_portas' => 'required|string|min:1|max:2',
+            'numero_portas_analogicas' => 'required|string|min:1|max:2',
+            'numero_portas_digitais' => 'required|string|min:1|max:2',
          ]);
 
-         $controladora = Controladora::findOrFail($id);
-         $controladora->update($validatedData);
+        // Verifique se algum campo tem status igual a 1
+        $hasStatusOne = ControladoraPortas::where('controladora_id', $id)
+            ->where('status', 1)
+            ->exists();
+
+        if (!$hasStatusOne) {
+
+            ControladoraPortas::where('controladora_id', $id)->delete();
+
+            $controladora = Controladora::findOrFail($id);
+            $controladora->update($validatedData);
+
+            if ($controladora) {
+                for($i = 0; $i < $controladora->numero_portas_analogicas; $i++) {
+                    $arr = [
+                        'controladora_id' => $controladora->id,
+                        'nome' => 'A' . $i,
+                        'tipo' => 'A',
+                        'status' => 0,
+                    ];
+
+                    ControladoraPortas::create($arr);
+                }
+
+                for($i = 0; $i < $controladora->numero_portas_digitais; $i++) {
+                    $arr = [
+                        'controladora_id' => $controladora->id,
+                        'nome' => 'D' . $i,
+                        'tipo' => 'D',
+                        'status' => 0,
+                    ];
+
+                    ControladoraPortas::create($arr);
+                }
+             }
+
+        }
 
          return redirect('/controladoras')->with('success', 'Controladora atualizada com sucesso.');
      }
@@ -94,7 +143,8 @@ class ControladoraController extends Controller
         foreach ($controladora->portas as $porta) {
             $listaPortas[] = [
                 'id' => $porta->id -1,
-                'nome' => $porta->nome
+                'nome' => $porta->nome,
+                'tipo' => $porta->tipo,
             ];
         }
 

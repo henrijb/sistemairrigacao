@@ -19,7 +19,8 @@ class Controladora extends Model
     protected $fillable = [
         'nome',
         'status',
-        'numero_portas',
+        'numero_portas_analogicas',
+        'numero_portas_digitais',
         'ip'
     ];
 

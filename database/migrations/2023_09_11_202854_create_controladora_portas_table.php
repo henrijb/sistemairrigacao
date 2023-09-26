@@ -17,6 +17,7 @@ class CreateControladoraPortasTable extends Migration
             $table->id();
             $table->bigInteger('controladora_id')->unsigned();
             $table->string('nome');
+            $table->string('tipo');
             $table->string('status');
             $table->timestamps();
             $table->softDeletes();

@@ -9,7 +9,8 @@
                 <tr>
                     <th>ID</th>
                     <th>Nome</th>
-                    <th>Número de Portas</th>
+                    <th>Portas Analógicas</th>
+                    <th>Portas Digitais</th>
                     <th>Status</th>
                     <th>IP<th>
                 </tr>
@@ -19,7 +20,8 @@
                 <tr>
                     <td>{{ $controladora->id }}</td>
                     <td>{{ $controladora->nome }}</td>
-                    <td>{{ $controladora->numero_portas }}</td>
+                    <td>{{ $controladora->numero_portas_analogicas }}</td>
+                    <td>{{ $controladora->numero_portas_digitais }}</td>
                     <td>{{ $controladora->ip }}</td>
 
                     @if($controladora->status == 'A')

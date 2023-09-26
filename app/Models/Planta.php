@@ -22,7 +22,8 @@ class Planta extends Model
         'percentual_umidade',
         'ultima_rega',
         'status',
-        'porta_arduino',
+        'porta_arduino_analogica',
+        'porta_arduino_digital',
         'id_arduino',
     ];
 
@@ -44,4 +45,15 @@ class Planta extends Model
         'data_plantacao'  => 'date',
         'ultima_rega' => 'datetime:Y-m-d H:i',
     ];
+
+    public function controladora()
+    {
+        return $this->belongsTo(Controladora::class, 'id_arduino');
+    }
+
+    public function controladoraPorta()
+    {
+        return $this->belongsTo(ControladoraPortas::class, 'porta_arduino_analogica');
+    }
+
 }

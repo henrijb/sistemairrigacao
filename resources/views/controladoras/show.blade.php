@@ -16,15 +16,19 @@
                 <tr>
                     <th>Status:</th>
 
-                     @if($controladora->status == 'A')         
-                        <td>Ativo</td>         
+                     @if($controladora->status == 'A')
+                        <td>Ativo</td>
                      @else
-                        <td>Desativado</td>        
+                        <td>Desativado</td>
                      @endif
                 </tr>
                 <tr>
-                    <th>Número de Portas:</th>
-                    <td>{{ $controladora->numero_portas }}</td>
+                    <th>Portas Analógicas:</th>
+                    <td>{{ $controladora->numero_portas_analogicas }}</td>
+                </tr>
+                <tr>
+                    <th>Portas Digitais:</th>
+                    <td>{{ $controladora->numero_portas_digitais }}</td>
                 </tr>
             </tbody>
         </table>

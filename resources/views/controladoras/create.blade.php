@@ -1,16 +1,5 @@
 @extends('layouts.app')
 
-<!--
-@if(isset ($errors) && count($errors) > 0)
-    <div class="alert alert-warning" role="alert">
-        <ul class="list-unstyled mb-0">
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
--->
 @section('content')
     <div class="container">
         <h2>Cadastrar Nova Controladora</h2>
@@ -28,8 +17,12 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="numero_portas">Quantidade de Portas:</label>
-                <input type="text" class="form-control" id="numero_portas" name="numero_portas" required>
+                <label for="numero_portas_analogicas">Portas Analógicas:</label>
+                <input type="text" class="form-control" id="numero_portas_analogicas" name="numero_portas_analogicas" required>
+            </div>
+            <div class="form-group">
+                <label for="numero_portas">Portas Digitais:</label>
+                <input type="text" class="form-control" id="numero_portas_digitais" name="numero_portas_digitais" required>
             </div>
             <div class="form-group">
                 <label for="ip">IP:</label>
@@ -37,7 +30,7 @@
             </div>
             <div>
                 <button type="submit" class="btn btn-success">Salvar</button>
-                <a href="{{ route('pl_index') }}" class="btn btn-primary">Voltar</a>
+                <a href="{{ route('ct_index') }}" class="btn btn-primary">Voltar</a>
             </div>
         </form>
     </div>

@@ -13,6 +13,7 @@ class ControladoraPortas extends Model
     protected $fillable = [
         'controladora_id',
         'nome',
+        'tipo',
         'status',
     ];
 }

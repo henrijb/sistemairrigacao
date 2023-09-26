@@ -11,7 +11,8 @@ class ControladoraSeeder extends Seeder
         Controladora::create([
             'nome' => 'ARDUINO MEGA',
             'status' => 'A',
-            'numero_portas' => 53,
+            'numero_portas_analogicas' => 16,
+            'numero_portas_digitais' => 54,
             'ip' => '192.168.0.99',
         ]);
     }

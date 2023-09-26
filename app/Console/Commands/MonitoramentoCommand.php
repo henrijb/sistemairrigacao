@@ -103,14 +103,14 @@ class MonitoramentoCommand extends Command
 
     private function regar(Controladora $controladora, $shutdown = false)
     {
-        $response = Http::post($controladora->ip . '/rele', [
+        $response = Http::post($controladora->ip . '/irrigacao', [
             'power' => $shutdown,
             'porta' => 25 // @todo criar coluna no banco para cadastrar a porta do relé
         ]);
 
         if ($response->successful()) {
             $data = json_decode($response->body(), true);
-            return $data['rele_status'];
+            return $data['irrigacao_status'];
         }
 
         return false;

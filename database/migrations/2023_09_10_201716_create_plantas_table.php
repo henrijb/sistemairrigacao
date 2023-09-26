@@ -20,7 +20,8 @@ class CreatePlantasTable extends Migration
             $table->dateTime('ultima_rega')->nullable();
             $table->date('data_plantacao');
             $table->string('status');
-            $table->integer('porta_arduino');
+            $table->integer('porta_arduino_analogica');
+            $table->integer('porta_arduino_digital');
             $table->integer('id_arduino');
             $table->timestamps();
         });

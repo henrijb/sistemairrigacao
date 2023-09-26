@@ -13,7 +13,8 @@ class PlantasSeeder extends Seeder
             'percentual_umidade' => 60,
             'data_plantacao' => now(),
             'status' => 'A',
-            'porta_arduino' => 4,
+            'porta_arduino_analogica' => 4,
+            'porta_arduino_digital' => 46,
             'id_arduino' => 1,
         ]);
 
@@ -22,7 +23,8 @@ class PlantasSeeder extends Seeder
             'percentual_umidade' => 20,
             'data_plantacao' => now(),
             'status' => 'A',
-            'porta_arduino' => 5,
+            'porta_arduino_analogica' => 5,
+            'porta_arduino_digital' => 48,
             'id_arduino' => 1,
         ]);
     }
