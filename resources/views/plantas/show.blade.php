@@ -35,16 +35,16 @@
                      @endif
                 </tr>
                 <tr>
-                    <th>Arduino ID:</th>
+                    <th>Nome Arduino:</th>
                     <td>{{ $planta->controladora->nome }}</td>
                 </tr>
                 <tr>
                     <th>Arduino Porta Analógica:</th>
-                    <td>{{ $planta->controladoraPorta->nome }}</td>
+                    <td>{{ $planta->controladoraPortaAnalogica->nome }}</td>
                 </tr>
                 <tr>
                     <th>Arduino Porta Digital:</th>
-                    <td>{{ $planta->controladoraPorta->nome }}</td>
+                    <td>{{ $planta->controladoraPortaDigital->nome }}</td>
                 </tr>
             </tbody>
         </table>

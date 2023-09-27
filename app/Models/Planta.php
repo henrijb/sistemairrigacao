@@ -51,9 +51,14 @@ class Planta extends Model
         return $this->belongsTo(Controladora::class, 'id_arduino');
     }
 
-    public function controladoraPorta()
+    public function controladoraPortaAnalogica()
     {
-        return $this->belongsTo(ControladoraPortas::class, 'porta_arduino_analogica');
+        return $this->hasOne(ControladoraPortas::class, 'id' , 'porta_arduino_analogica');
+    }
+
+    public function controladoraPortaDigital()
+    {
+        return $this->hasOne(ControladoraPortas::class, 'id' , 'porta_arduino_digital');
     }
 
 }

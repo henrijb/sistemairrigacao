@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Psy\Readline\Hoa\Console;
+use Illuminate\Support\Facades\Log;
 
 class MonitoramentoCommand extends Command
 {
@@ -44,6 +45,7 @@ class MonitoramentoCommand extends Command
      */
     public function handle()
     {
+        Log::alert("Iniciando Rega");
         $plantas = Planta::all()
             ->where('status', self::STATUS_ATIVO);
 
@@ -85,12 +87,16 @@ class MonitoramentoCommand extends Command
                 $this->info('Dados atualizados com sucesso!');
             }
         }
+        Log::alert("Finalizando Rega");
     }
 
     private function monitorarUmidade(Planta $planta, Controladora $controladora)
     {
         $response = Http::post($controladora->ip . '/umidade', [
-            'porta' => $planta->porta_arduino
+            //'porta' => 5
+            'porta' => $planta->porta_arduino_digital
+
+
         ]);
 
         if ($response->successful()) {
@@ -105,7 +111,8 @@ class MonitoramentoCommand extends Command
     {
         $response = Http::post($controladora->ip . '/irrigacao', [
             'power' => $shutdown,
-            'porta' => 25 // @todo criar coluna no banco para cadastrar a porta do relé
+            'portaMotor' => 24,
+            'portaSolenoide' => 48,
         ]);
 
         if ($response->successful()) {

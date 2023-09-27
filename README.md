@@ -62,3 +62,12 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+## lista os servicos na cron
+crontab -l
+## edita arquivo da cron
+crontab -e 
+* * * * * /usr/local/bin/php /var/www/artisan schedule:run 1>> /dev/null 2>&1
+docker exec -u root -it plantas_app bash
+service cron start

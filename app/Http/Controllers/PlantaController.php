@@ -45,9 +45,11 @@ class PlantaController extends Controller
      // Exibir um usuário específico
      public function show($id)
      {
-        $planta = Planta::with('controladora')->findOrFail($id)::with('controladoraPorta')->findOrFail($id);
+        $planta = Planta::whereId($id)->first();
+//  /usr/local/bin/php /var/www/artisan irrigacao:monitorar
 
-
+// docker
+//crontab -l | { cat; echo "0 0/2 0 ? * * * /usr/local/bin/php /var/www/artisan irrigacao:monitorar"; } | crontab -
 
         return view('plantas.show', ['planta' => $planta]);
      }
