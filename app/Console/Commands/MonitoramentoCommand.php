@@ -45,7 +45,9 @@ class MonitoramentoCommand extends Command
      */
     public function handle()
     {
+
         Log::alert("Iniciando Rega");
+
         $plantas = Planta::all()
             ->where('status', self::STATUS_ATIVO);
 
@@ -69,9 +71,9 @@ class MonitoramentoCommand extends Command
             while ($percentualUmidade <= $planta->percentual_umidade) {
                 $this->info('Realizando a rega...');
 
-                $this->regar($controladora, true);
+                $this->regar($planta, true);
                 sleep(2);
-                $this->regar($controladora, false);
+                $this->regar($planta, false);
                 sleep(8);
                 $percentualUmidade = $this->monitorarUmidade($planta, $controladora);
                 $this->info('Umidade atual do solo: ' . $percentualUmidade);
@@ -93,10 +95,7 @@ class MonitoramentoCommand extends Command
     private function monitorarUmidade(Planta $planta, Controladora $controladora)
     {
         $response = Http::post($controladora->ip . '/umidade', [
-            //'porta' => 5
-            'porta' => $planta->porta_arduino_digital
-
-
+            'porta' => $planta->controladoraPortaAnalogica->nome
         ]);
 
         if ($response->successful()) {
@@ -107,12 +106,12 @@ class MonitoramentoCommand extends Command
         return false;
     }
 
-    private function regar(Controladora $controladora, $shutdown = false)
+    private function regar(Planta $planta, $shutdown = false)
     {
-        $response = Http::post($controladora->ip . '/irrigacao', [
+        $response = Http::post($planta->controladora->ip . '/irrigacao', [
             'power' => $shutdown,
-            'portaMotor' => 24,
-            'portaSolenoide' => 48,
+            'portaMotor' => env('PORTA_MOTOR'),
+            'portaSolenoide' => $planta->controladoraPortaDigital->nome,
         ]);
 
         if ($response->successful()) {
