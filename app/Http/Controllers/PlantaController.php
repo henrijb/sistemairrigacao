@@ -39,6 +39,14 @@ class PlantaController extends Controller
 
          $planta = Planta::create($validatedData);
 
+         $planta->controladoraPortaAnalogica->update([
+            'status' => 1,
+         ]);
+
+         $planta->controladoraPortaDigital->update([
+            'status' => 1,
+         ]);
+
          return redirect('/plantas')->with('success', 'Planta cadastrada com sucesso.');
      }
 
@@ -46,11 +54,6 @@ class PlantaController extends Controller
      public function show($id)
      {
         $planta = Planta::whereId($id)->first();
-//  /usr/local/bin/php /var/www/artisan irrigacao:monitorar
-
-// docker
-//crontab -l | { cat; echo "0 0/2 0 ? * * * /usr/local/bin/php /var/www/artisan irrigacao:monitorar"; } | crontab -
-
         return view('plantas.show', ['planta' => $planta]);
      }
 
@@ -76,17 +79,27 @@ class PlantaController extends Controller
             'id_arduino' => 'required|string|min:1',
          ]);
 
-
-
-         //$validatedData['data_plantacao'] = \Carbon\Carbon::createFromFormat('d/m/Y', $validatedData['data_plantacao']);
-         //$validatedData['ultima_rega'] = \Carbon\Carbon::createFromFormat('d/m/Y', $validatedData['ultima_rega']);
-
-//         $validatedData['data_plantacao'] = $validatedData['data_plantacao']->format('Y-m-d H:i:s');
-//         $validatedData['ultima_rega'] =  $validatedData['ultima_rega']->format('Y-m-d H:i:s');
-
-
          $planta = Planta::findOrFail($id);
+
+         $planta->controladoraPortaAnalogica->update([
+            'status' => 0,
+         ]);
+
+         $planta->controladoraPortaDigital->update([
+            'status' => 0,
+         ]);
+
          $planta->update($validatedData);
+
+         $planta2 = Planta::findOrFail($planta->id);
+
+         $planta2->controladoraPortaAnalogica->update([
+            'status' => 1,
+         ]);
+
+         $planta2->controladoraPortaDigital->update([
+            'status' => 1,
+         ]);
 
          return redirect('/plantas')->with('success', 'Planta atualizada com sucesso.');
      }
@@ -95,10 +108,17 @@ class PlantaController extends Controller
      public function destroy($id)
      {
          $planta = Planta::findOrFail($id);
+
+         $planta->controladoraPortaAnalogica->update([
+            'status' => 0,
+         ]);
+
+         $planta->controladoraPortaDigital->update([
+            'status' => 0,
+         ]);
+
          $planta->delete();
 
          return redirect('/plantas')->with('success', 'Planta excluída com sucesso.');
      }
-
-
 }
