@@ -71,3 +71,10 @@ crontab -e
 * * * * * /usr/local/bin/php /var/www/artisan schedule:run 1>> /dev/null 2>&1
 docker exec -u root -it plantas_app bash
 service cron start
+
+
+
+//  /usr/local/bin/php /var/www/artisan irrigacao:monitorar
+
+// docker
+//crontab -l | { cat; echo "0 0/2 0 ? * * * /usr/local/bin/php /var/www/artisan irrigacao:monitorar"; } | crontab -
