@@ -11,7 +11,7 @@ class ControladoraPortasSeeder extends Seeder
         for ($i=0; $i < 16; $i++) {
             ControladoraPortas::create([
                 'controladora_id' => '1',
-                'nome' => 'A' . $i,
+                'nome' => $i,
                 'tipo' => 'A',
                 'status' => '0',
             ]);
@@ -20,7 +20,7 @@ class ControladoraPortasSeeder extends Seeder
         for ($i=0; $i < 54; $i++) {
             ControladoraPortas::create([
                 'controladora_id' => '1',
-                'nome' => 'D' . $i,
+                'nome' => $i,
                 'tipo' => 'D',
                 'status' => '0',
             ]);

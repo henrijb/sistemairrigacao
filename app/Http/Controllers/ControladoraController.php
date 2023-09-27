@@ -142,7 +142,7 @@ class ControladoraController extends Controller
 
         foreach ($controladora->portas as $porta) {
             $listaPortas[] = [
-                'id' => $porta->id -1,
+                'id' => $porta->id,
                 'nome' => $porta->nome,
                 'tipo' => $porta->tipo,
             ];
