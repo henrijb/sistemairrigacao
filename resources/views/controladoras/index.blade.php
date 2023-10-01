@@ -22,14 +22,12 @@
                     <td>{{ $controladora->nome }}</td>
                     <td>{{ $controladora->numero_portas_analogicas }}</td>
                     <td>{{ $controladora->numero_portas_digitais }}</td>
-                    <td>{{ $controladora->ip }}</td>
-
                     @if($controladora->status == 'A')
                         <td>Ativo</td>
                     @else
                         <td>Desativado</td>
                     @endif
-
+                    <td>{{ $controladora->ip }}</td>
                     <td>
                         <a href="{{ url('/controladoras/' . $controladora->id . '/show/') }}" class="btn btn-info">Ver</a>
                         <a href="{{ url('/controladoras/' . $controladora->id . '/edit/') }}" class="btn btn-warning">Editar</a>
