@@ -100,6 +100,7 @@ class MonitoramentoCommand extends Command
 
         if ($response->successful()) {
             $data = json_decode($response->body(), true);
+            Log::alert("Umidade do solo " . $data['umidade']);
             return $data['umidade'];
         };
 
@@ -114,8 +115,15 @@ class MonitoramentoCommand extends Command
             'portaSolenoide' => $planta->controladoraPortaDigital->nome,
         ]);
 
+        Log::alert("Motor " . env('PORTA_MOTOR'));
+        Log::alert("Solenoide " . $planta->controladoraPortaDigital->nome);
+        Log::alert("Estado " . $shutdown);
+
         if ($response->successful()) {
             $data = json_decode($response->body(), true);
+
+            Log::alert("Irrigacao " . $data['irrigacao_status']);
+
             return $data['irrigacao_status'];
         }
 
