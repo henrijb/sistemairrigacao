@@ -4,12 +4,12 @@
     <div class="bg-light p-4 rounded">
         @auth
         <h1>Dashboard</h1>
-        <p class="lead">Somente pessoas autorizadas podem visualizar.</p>
+        <p class="lead"></p>
         @endauth
 
         @guest
-        <h1>Página inicial</h1>
-        <p class="lead">É necessário se logar para visualizar</p>
+        <h1>Bem vindo ao sistema de irrigação.</h1>
+        <p class="lead"></p>
         @endguest
     </div>
 @endsection
