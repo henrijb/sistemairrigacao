@@ -100,6 +100,7 @@ class MonitoramentoCommand extends Command
 
         if ($response->successful()) {
             $data = json_decode($response->body(), true);
+            Log::alert("Sensor " . $planta->controladoraPortaAnalogica->nome);
             Log::alert("Umidade do solo " . $data['umidade']);
             return $data['umidade'];
         };

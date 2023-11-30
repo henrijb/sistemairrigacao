@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h2>Editar Usuário</h2>
+        <h2>Editar Planta</h2>
         <form action="{{ url('/plantas/' . $planta->id . '/update') }}" method="POST">
             @csrf
             @method('PUT')
